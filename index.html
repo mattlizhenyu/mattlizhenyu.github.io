@@ -517,11 +517,7 @@ svg{display:block}
 
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
   .reveal,.reveal-stagger>*,.hero-in>*{opacity:1!important;translate:none!important}
-  /* 关闭动效时箭头停在可见状态，别被动画结束帧的 opacity:0 藏起来 */
-  .scroll-hint svg{animation:none!important;opacity:1!important;transform:none!important}
-  .scroll-hint::after{display:none!important}
 }
 
 /* 截图自查用：#capture 时强制全部展开，不影响正常访问 */
