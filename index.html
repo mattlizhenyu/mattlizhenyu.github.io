@@ -577,7 +577,11 @@ svg{display:block}
   </div>
 </footer>
 
-<script src="content.js"></script>
+<script>
+/* 动态加载 content.js 并强制绕过缓存：URL 带时间戳，保证每次拿到最新内容。
+   这样改完 content.js 后刷新页面立刻生效，不会被浏览器旧缓存坑。 */
+document.write('<scr' + 'ipt src="content.js?t=' + Date.now() + '"><\/scr' + 'ipt>');
+</script>
 <script>
 (function(){
   'use strict';
