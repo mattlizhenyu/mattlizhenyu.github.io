@@ -66,7 +66,7 @@ window.SITE_DATA = {
         title: "IT 基础设施运维",
         sub: "保障业务连续性",
         desc: "负责公司 IT 软硬件、网络通信、服务器及视频会议系统的全链路运维，确保办公环境稳定高效运转。",
-        tags: ["软硬件运维", "宽带局域网", "视频会议系统", "服务器管理"]
+        tags: ["软硬件运维", "宽带/局域网", "视频会议系统", "服务器管理"]
       },
       {
         icon: "robot",
@@ -126,11 +126,33 @@ window.SITE_DATA = {
   hobbies: {
     title: "兴趣爱好",
     subtitle: "工作之余，保持对世界的好奇。",
+    // 每个爱好都可以有彩蛋：鼠标放上去弹出小窗口
+    // egg: "note"     → 弹出便签小窗，内容用 note 数组（以 "> " 开头的行显示为琥珀色）
+    // egg: "terminal" → 弹出 Linux 终端（逐字打字动画）
+    // egg: "dogtag"   → 弹出军迷身份牌（暗号随机）
     tags: [
-      { label: "看书" },
-      { label: "探索新技术" },
-      { label: "篮球" },
-      { label: "乒乓球" },
+      { label: "看书", egg: "note", note: [
+        "> reading list",
+        "技术类：计算机 / 网络 / 自动化",
+        "人文类：历史与传记",
+        "状态：常读常新"
+      ] },
+      { label: "探索新技术", egg: "note", note: [
+        "> now exploring",
+        "AI Agent 与大模型应用",
+        "RPA + AI 的组合玩法",
+        "HomeLab 折腾记录中"
+      ] },
+      { label: "篮球", egg: "note", note: [
+        "> weekend mode",
+        "风格：够出汗，够开心",
+        "场地：港区 / 东区球场"
+      ] },
+      { label: "乒乓球", egg: "note", note: [
+        "> ping-pong",
+        "打法：近台快攻",
+        "原则：输赢各半，气势不能输"
+      ] },
       { label: "Linux", egg: "terminal" },
       { label: "军迷",  egg: "dogtag" }
     ],
