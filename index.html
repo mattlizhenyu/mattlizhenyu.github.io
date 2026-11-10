@@ -188,12 +188,21 @@ svg{display:block}
 .scroll-hint{
   position:absolute;bottom:28px;left:50%;translate:-50% 0;z-index:2;
   color:hsl(38 92% 50% / .85);padding:8px;
-  animation:bounceDown 1.8s cubic-bezier(.45,0,.55,1) infinite;
   filter:drop-shadow(0 0 7px hsl(38 92% 50% / .5));
   transition:color .3s ease,filter .3s ease;
 }
 .scroll-hint:hover{color:var(--primary);filter:drop-shadow(0 0 12px hsl(38 92% 50% / .8))}
-.scroll-hint svg{width:28px;height:28px}
+.scroll-hint svg{
+  position:relative;z-index:1;width:28px;height:28px;
+  animation:scrollFlow 1.9s cubic-bezier(.5,0,.5,1) infinite;
+}
+/* 箭头后面跟一个淡出的残影，强化“一直往下走”的方向感 */
+.scroll-hint::after{
+  content:"";position:absolute;left:50%;top:50%;width:17px;height:17px;margin:-11px 0 0 -8.5px;
+  border-right:2px solid currentColor;border-bottom:2px solid currentColor;
+  pointer-events:none;
+  animation:scrollFlowGhost 1.9s cubic-bezier(.5,0,.5,1) infinite;
+}
 
 /* ============ 区块标题 ============ */
 .sec-head{margin-bottom:2.75rem}
@@ -470,7 +479,18 @@ svg{display:block}
 @keyframes floatY{0%,100%{transform:translateY(-12px)}50%{transform:translateY(12px)}}
 @keyframes floatY2{0%,100%{transform:translateY(-8px)}50%{transform:translateY(8px)}}
 @keyframes floatRot{0%,100%{transform:rotate(45deg) translateY(-8px)}50%{transform:rotate(50deg) translateY(8px)}}
-@keyframes bounceDown{0%,100%{transform:translateY(0);opacity:.7}50%{transform:translateY(9px);opacity:1}}
+@keyframes scrollFlow{
+  0%{transform:translateY(-7px);opacity:0}
+  15%{opacity:1}
+  70%{transform:translateY(7px);opacity:1}
+  100%{transform:translateY(15px);opacity:0}
+}
+@keyframes scrollFlowGhost{
+  0%{transform:translateY(-9px) rotate(45deg);opacity:0}
+  15%{opacity:.32}
+  70%{transform:translateY(5px) rotate(45deg);opacity:.22}
+  100%{transform:translateY(13px) rotate(45deg);opacity:0}
+}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 
 .reveal{opacity:0}
@@ -499,6 +519,9 @@ svg{display:block}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
   .reveal,.reveal-stagger>*,.hero-in>*{opacity:1!important;translate:none!important}
+  /* 关闭动效时箭头停在可见状态，别被动画结束帧的 opacity:0 藏起来 */
+  .scroll-hint svg{animation:none!important;opacity:1!important;transform:none!important}
+  .scroll-hint::after{display:none!important}
 }
 
 /* 截图自查用：#capture 时强制全部展开，不影响正常访问 */
